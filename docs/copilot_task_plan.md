@@ -1,0 +1,142 @@
+# Copilot Task Plan
+
+Use this file as a backlog for GitHub Copilot Workspace / coding agent.
+
+## Priority 1 — Make the repository executable
+
+### Task 1.1: Add unified pipeline runner
+
+Create `src/run_pipeline.py` that:
+
+1. loads raw entities and transactions;
+2. rebuilds graph features;
+3. trains the baseline model;
+4. runs missing-edge stress tests;
+5. runs intervention simulation;
+6. writes results to `outputs/metrics.json`.
+
+Acceptance criteria:
+
+```bash
+python src/run_pipeline.py
+```
+
+must complete without manual steps.
+
+---
+
+### Task 1.2: Add evaluation module
+
+Create `src/evaluate.py` with functions:
+
+- `classification_metrics(y_true, y_score)`
+- `expected_loss_summary(df)`
+- `stress_curve_summary(results)`
+
+Metrics:
+
+- ROC-AUC
+- PR-AUC
+- Brier score
+- EL before
+- EL after
+- EL reduction %
+- missing-edge degradation %
+
+---
+
+### Task 1.3: Add outputs folder
+
+Create generated outputs:
+
+```text
+outputs/
+  metrics.json
+  stress_results.csv
+  model_report.md
+```
+
+---
+
+## Priority 2 — Strong research demonstration
+
+### Task 2.1: Add financial-only vs graph-enhanced benchmark
+
+Compare:
+
+1. financial-only model;
+2. financial + graph features model.
+
+Output benchmark table:
+
+```text
+Model | ROC-AUC | PR-AUC | Brier
+```
+
+---
+
+### Task 2.2: Add stress-testing chart
+
+Generate chart:
+
+```text
+figures/04_missing_edge_stress.png
+```
+
+x-axis: missing edge rate  
+y-axis: ROC-AUC or EL reduction
+
+---
+
+### Task 2.3: Add intervention demo
+
+Create deterministic scenario:
+
+- one EFU path;
+- one bottleneck;
+- baseline product;
+- optimized bundle;
+- before/after cash-tension.
+
+Output:
+
+```text
+figures/05_intervention_demo.png
+outputs/intervention_demo.json
+```
+
+---
+
+## Priority 3 — GitHub polish
+
+### Task 3.1: Improve README
+
+Add:
+
+- benchmark table;
+- architecture diagram reference;
+- figures;
+- limitations;
+- "How to cite";
+- "How to reproduce".
+
+---
+
+### Task 3.2: Add CONTRIBUTING.md
+
+Explain:
+
+- branch naming;
+- code quality;
+- reproducibility;
+- synthetic data limits.
+
+---
+
+### Task 3.3: Add GitHub issue templates
+
+Add templates for:
+
+- modeling task;
+- dataset issue;
+- documentation issue.

@@ -1,0 +1,15 @@
+seed: 2026
+dataset:
+  nodes: 650
+  periods_months: 18
+  default_rate_target: 0.05
+models:
+  baseline: gradient_boosting
+  challenger: graphsage
+stress_tests:
+  missing_edge_rates: [0.0, 0.1, 0.2, 0.3, 0.4]
+metrics:
+  - roc_auc
+  - pr_auc
+  - brier
+  - expected_loss_reduction

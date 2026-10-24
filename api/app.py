@@ -1,7 +1,10 @@
 from fastapi import FastAPI
-import pandas as pd
+from src.summarize_fixtures import run_demo
 
-app = FastAPI(title="Execution-Aware Credit Structuring API")
+app = FastAPI(
+    title="Execution-Network Synthetic Fixture API",
+    description="Descriptive aggregation of precomputed synthetic outcomes; no causal intervention is estimated.",
+)
 
 @app.get("/health")
 def health():
@@ -9,10 +12,6 @@ def health():
 
 @app.get("/portfolio-summary")
 def portfolio_summary():
-    tx = pd.read_csv("data/raw/transactions.csv")
-    return {
-        "transactions": int(len(tx)),
-        "expected_loss_before": float(tx.expected_loss_before.sum()),
-        "expected_loss_after": float(tx.expected_loss_after.sum()),
-        "reduction_pct": float((tx.expected_loss_before.sum() - tx.expected_loss_after.sum()) / tx.expected_loss_before.sum() * 100)
-    }
+    summary = run_demo()
+    # Retain the original API key as an alias for the descriptive fixture metric.
+    return {**summary, "reduction_pct": summary["expected_loss_reduction_pct"]}

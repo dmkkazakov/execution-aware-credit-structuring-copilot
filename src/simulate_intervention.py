@@ -1,18 +1,13 @@
-import pandas as pd
+"""Legacy entry point for fixture aggregation, not a causal simulation.
 
-def run_demo():
-    tx = pd.read_csv("data/raw/transactions.csv")
-    before = tx["cash_tension_before"].mean()
-    after = tx["cash_tension_after"].mean()
-    el_before = tx["expected_loss_before"].sum()
-    el_after = tx["expected_loss_after"].sum()
+Prefer ``python -m src.summarize_fixtures``. The old filename is retained so
+existing links and commands continue to work with explicit result metadata.
+"""
 
-    return {
-        "mean_cash_tension_before": round(before, 4),
-        "mean_cash_tension_after": round(after, 4),
-        "tension_reduction_pct": round((before-after)/before*100, 2),
-        "expected_loss_reduction_pct": round((el_before-el_after)/el_before*100, 2)
-    }
+if __package__:
+    from .summarize_fixtures import main, run_demo
+else:
+    from summarize_fixtures import main, run_demo
 
 if __name__ == "__main__":
-    print(run_demo())
+    main()

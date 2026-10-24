@@ -1,15 +1,17 @@
+# Design outline only: current scripts do not read this file.
+# No fixture generator or GraphSAGE/causal experiment is implemented here.
 seed: 2026
 dataset:
   nodes: 650
   periods_months: 18
   default_rate_target: 0.05
 models:
-  baseline: gradient_boosting
-  challenger: graphsage
+  baseline: sklearn_gradient_boosting
+  challenger: graphsage_not_implemented
 stress_tests:
-  missing_edge_rates: [0.0, 0.1, 0.2, 0.3, 0.4]
+  missing_transaction_row_rates: [0.0, 0.1, 0.2, 0.3, 0.4]
 metrics:
   - roc_auc
-  - pr_auc
+  - average_precision
   - brier
-  - expected_loss_reduction
+  - descriptive_fixture_expected_loss_reduction

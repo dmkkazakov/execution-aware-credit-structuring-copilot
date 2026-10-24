@@ -3,7 +3,6 @@ numpy
 networkx
 matplotlib
 scikit-learn
-xgboost
 fastapi
 uvicorn
 pyyaml

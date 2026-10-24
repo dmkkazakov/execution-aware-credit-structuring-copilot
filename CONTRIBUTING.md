@@ -14,9 +14,10 @@ This repository is a research engineering asset for graph-based credit risk and 
 
 ```bash
 pip install -r requirements.txt
-python src/simulate_intervention.py
-python src/stress_testing.py
-python src/train_xgb.py
+python -m src.summarize_fixtures
+python -m src.stress_testing
+python -m src.train_baseline
+python -m unittest discover -s tests -v
 ```
 
 ## Branch naming
@@ -35,3 +36,7 @@ experiment/<short-name>
 - Results are reproducible.
 - README/docs updated if needed.
 - Synthetic-data limitations remain explicit.
+
+## Evidence boundary
+
+The current code aggregates precomputed synthetic outcomes and fits a static scikit-learn baseline. It does not reproduce a causal intervention experiment. Keep this distinction in CLI/API outputs and documentation. Do not train on latent simulation variables, post-intervention outcomes or labels. Read [validation status](docs/VALIDATION_STATUS.md) before extending the experiment.
